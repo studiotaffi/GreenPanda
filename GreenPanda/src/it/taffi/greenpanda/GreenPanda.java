@@ -24,9 +24,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import org.apache.android.http.PlayerInteraction;
-import org.apache.android.media.R;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
@@ -243,3 +240,4 @@ public class GreenPanda extends Activity {
 	
 	
 }
+

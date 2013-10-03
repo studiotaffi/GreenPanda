@@ -1,4 +1,4 @@
-package org.apache.android.http;
+package it.taffi.greenpanda;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,6 +10,7 @@ import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
 
 
 
@@ -74,3 +75,5 @@ public class PlayerInteraction implements Runnable {
 	}
 
 }
+
+

@@ -15,7 +15,7 @@
  	See the License for the specific language governing permissions and
  	limitations under the License.
 --> 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.apache.android.media">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="it.taffi.greenpanda">
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:name="GreenPandaApplication" android:label="GreenPandaApplication" android:icon="@drawable/logo" android:logo="@drawable/logo">
 		<activity android:name="it.taffi.greenpanda.GreenPanda" android:label="Media/GreenPanda">
