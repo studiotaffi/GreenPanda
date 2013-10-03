@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.android.media;
+package it.taffi.greenpanda;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +26,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.android.http.PlayerInteraction;
+import org.apache.android.media.R;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
@@ -43,7 +44,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
+import android.widget.VideoView; //ECCO QUA COME TI FACCIO UN PLAYER!
 
 
 
@@ -51,7 +52,7 @@ import android.widget.VideoView;
 public class GreenPanda extends Activity {
 	private static final String TAG = "GreenPanda";
 
-	private VideoView mVideoView;
+	private VideoView mVideoView;  //!!!!
 	private EditText mPath;
 	private ImageButton mPlay;
 	private ImageButton mPause;
@@ -73,11 +74,11 @@ public class GreenPanda extends Activity {
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		setContentView(R.layout.main);
-		mVideoView = (VideoView) findViewById(R.id.surface_view);
+		setContentView(R.layout.main);   //!!!
+		mVideoView = (VideoView) findViewById(R.id.surface_view); //!!!
 
 		mPath = (EditText) findViewById(R.id.path);
-		mPath.setText("http://cloud.taffi.it/video/video4.mp4");
+		mPath.setText("http://cloud.taffi.it/video/video4.mp4");  
 		
 		mPlay = (ImageButton) findViewById(R.id.play);
 		mPause = (ImageButton) findViewById(R.id.pause);
@@ -126,12 +127,12 @@ public class GreenPanda extends Activity {
 			}
 		});
 		
-		runOnUiThread(new Runnable(){
+		runOnUiThread(new Runnable(){   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			public void run() {
 				playVideo();
 			}
 		});
-	}
+	}  //onCreate
 	
 	
 	private void playVideo() {

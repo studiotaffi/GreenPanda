@@ -15,7 +15,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */ 
-package org.apache.android.media;
+package it.taffi.greenpanda;
 
 import android.app.Application;
 

@@ -1,5 +1,8 @@
 package it.taffi.videoframe;
 
+import org.apache.android.http.PlayerInteraction;
+import org.apache.android.media.GreenPanda;
+
 import it.taffi.videoframe.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -7,8 +10,13 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -17,6 +25,10 @@ import android.view.View;
  * @see SystemUiHider
  */
 public class FullscreenActivity extends Activity {
+	
+	
+	private VideoView mVideoView;  //Il player	
+	
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -45,15 +57,19 @@ public class FullscreenActivity extends Activity {
 	 */
 	private SystemUiHider mSystemUiHider;
 
-/*	@Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_fullscreen);
 
-		final View controlsView = findViewById(R.id.fullscreen_content_controls);
-		final View contentView = findViewById(R.id.fullscreen_content);
+//		final View controlsView = findViewById(R.id.fullscreen_content_controls);
+//		final View contentView = findViewById(R.id.fullscreen_content);
 
+//		final View controlsView = findViewById(R.id.fullscreen_content_controls);
+		final View contentView = findViewById(R.id.FullscreenActivity);
+
+		
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
@@ -74,22 +90,22 @@ public class FullscreenActivity extends Activity {
 							// in-layout UI controls at the bottom of the
 							// screen.
 							if (mControlsHeight == 0) {
-								mControlsHeight = controlsView.getHeight();
+	//							mControlsHeight = controlsView.getHeight();
 							}
 							if (mShortAnimTime == 0) {
 								mShortAnimTime = getResources().getInteger(
 										android.R.integer.config_shortAnimTime);
 							}
-							controlsView
-									.animate()
-									.translationY(visible ? 0 : mControlsHeight)
-									.setDuration(mShortAnimTime);
+		//					controlsView
+			//						.animate()
+		//							.translationY(visible ? 0 : mControlsHeight)
+			//						.setDuration(mShortAnimTime);
 						} else {
 							// If the ViewPropertyAnimator APIs aren't
 							// available, simply show or hide the in-layout UI
-							// controls.
-							controlsView.setVisibility(visible ? View.VISIBLE
-									: View.GONE);
+							// controls//.
+					//		controlsView.setVisibility(visible ? View.VISIBLE
+				//					: View.GONE);
 						}
 
 						if (visible && AUTO_HIDE) {
@@ -116,6 +132,15 @@ public class FullscreenActivity extends Activity {
 		// while interacting with the UI.
 //		findViewById(R.id.dummy_button).setOnTouchListener(
 //				mDelayHideTouchListener);
+	
+	//Faccio partire il player in un thread!!
+		runOnUiThread(new Runnable(){   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			public void run() {
+				playVideo();
+			}
+		});
+	
+	
 	}
 	
 	@Override
@@ -127,7 +152,7 @@ public class FullscreenActivity extends Activity {
 		// are available.
 		delayedHide(100);
 	}
-*/
+
 	/**
 	 * Touch listener to use for in-layout UI controls to delay hiding the
 	 * system UI. This is to prevent the jarring behavior of controls going away
@@ -159,4 +184,54 @@ public class FullscreenActivity extends Activity {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
+
+
+//ecco il player!	
+	private void playVideo() {
+		try {
+			final String path = mPath.getText().toString();
+			Log.v(TAG, "path: " + path);
+			if (path == null || path.length() == 0) {
+				Toast.makeText(GreenPanda.this, "File URL/path is empty",
+						Toast.LENGTH_LONG).show();
+
+			} else {
+				// If the path has not changed, just start the media player
+				if (path.equals(current) && mVideoView != null) {
+					mVideoView.start();
+					mVideoView.requestFocus();
+					return;
+				}
+				current = path;
+				mVideoView.setVideoPath(getDataSource(path));
+				mVideoView.start();
+				mVideoView.requestFocus();
+				
+				mHandler = new Handler() {
+					public void handleMessage(Message msg) {
+						Log.v("Hector", msg.obj.toString());
+						TextView t = new TextView(GreenPanda.this);
+						t.setText(msg.obj.toString());
+						mChatFlow.addView(t, 0);						
+					}
+				};
+				
+				PlayerInteraction p= PlayerInteraction.getInstance(mHandler);
+				Thread t = new Thread(p);
+				t.start();
+
+
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "error: " + e.getMessage(), e);
+			//if (mVideoView != null) {
+				//mVideoView.stopPlayback();
+			//}
+		}
+	}
+
+
 }
+
+
+	
