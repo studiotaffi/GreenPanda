@@ -4,5 +4,9 @@
     <string name="app_name">VideoFrame</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="large_text">Large Text</string>
+    <string name="small_text">Small Text</string>
+    <string name="thumbnail_description">Thumbnail</string>
+    
 
 </resources>
