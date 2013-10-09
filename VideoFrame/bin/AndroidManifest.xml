@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <application
@@ -24,7 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="MoviePlayerActivity"></activity>
+        <activity android:name="it.taffi.videoframe.MoviePlayerActivity" android:launchMode="singleTask" android:screenOrientation="landscape" android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name="it.taffi.videoframe.SimpleVideoPlayer">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.taffi.videoframe.VideoFrame" />
+        </activity>
+        <activity android:name="SurfaceVideoPlayer"></activity>
     </application>
 
 </manifest>

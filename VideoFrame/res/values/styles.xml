@@ -21,8 +21,8 @@
     <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@null</item>
-        <item name="buttonBarStyle">@style/ButtonBar</item>
-        <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
+        <item name="buttonBarStyle">@null</item>
+        <item name="buttonBarButtonStyle">@null</item>
     </style>
 
     <style name="ButtonBar">

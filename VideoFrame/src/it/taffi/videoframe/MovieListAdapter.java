@@ -18,7 +18,7 @@ import android.widget.TextView;
  */
 class MovieListAdapter extends BaseAdapter {
 	/** Context instance. */
-	private final Context context;
+	private  Context context;
 
 	/** Movie list. */
 	private final ArrayList<Movie> movieList;
@@ -35,7 +35,15 @@ class MovieListAdapter extends BaseAdapter {
 		this.context = context;
 		this.movieList = movieList;
 	}
-
+	
+	
+	public MovieListAdapter(ArrayList<Movie> movieList) {
+//		this.context = (Context) this;
+		this.movieList = movieList;
+	}
+	
+	
+	
 	/**
 	 * Gets the number of elements in movie list.
 	 * 

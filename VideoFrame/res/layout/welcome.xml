@@ -11,11 +11,18 @@
         android:layout_height="92dp"
         android:text="\n\nWelcome to Taffi VideoLooper" />
 
+    
+    <Button
+        android:id="@+id/videolist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video List" />
+    
     <Button
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start!" />
-
-   
+    
+    
 </LinearLayout>

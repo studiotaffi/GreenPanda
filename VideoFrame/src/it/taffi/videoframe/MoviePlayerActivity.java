@@ -15,15 +15,24 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import it.taffi.videoframe.R;
 
+
 /**
  * Movie player.
  * 
  * @author Onur Cinar
  */
 public class MoviePlayerActivity extends Activity implements OnItemClickListener {
-	/** Log tag. */
-	private static final String LOG_TAG = "MoviePlayer";
-
+	
+    	
+	//private static final String LOG_TAG = "MoviePlayer";
+	//private VideoList videolist;
+	
+	//public MoviePlayerActivity() {
+		
+	//	 videolist = new VideoList(); 		
+		
+	//}
+	
 	/**
 	 * On create lifecycle method.
 	 * 
@@ -33,55 +42,17 @@ public class MoviePlayerActivity extends Activity implements OnItemClickListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	
 		setContentView(R.layout.videolist);
-
-		ArrayList<Movie> movieList = new ArrayList<Movie>();
-
-		// Media columns to query
-		String[] mediaColumns = { MediaStore.Video.Media._ID,
-				MediaStore.Video.Media.TITLE, MediaStore.Video.Media.DURATION,
-				MediaStore.Video.Media.DATA,
-				MediaStore.Video.Media.MIME_TYPE };
-
-		// Thumbnail columns to query
-		String[] thumbnailColumns = { MediaStore.Video.Thumbnails.DATA };
-
-		// Query external movie content for selected media columns
-		Cursor mediaCursor = managedQuery(
-				MediaStore.Video.Media.EXTERNAL_CONTENT_URI, mediaColumns,
-				null, null, null);
-
-		// Loop through media results
-		if ((mediaCursor != null) && mediaCursor.moveToFirst()) {
-			do {
-				// Get the video id
-				int id = mediaCursor.getInt(mediaCursor
-						.getColumnIndex(MediaStore.Video.Media._ID));
-
-				// Get the thumbnail associated with the video
-				Cursor thumbnailCursor = managedQuery(
-						MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI,
-						thumbnailColumns, MediaStore.Video.Thumbnails.VIDEO_ID
-								+ "=" + id, null, null);
-
-				// New movie object from the data
-				Movie movie = new Movie(mediaCursor, thumbnailCursor);
-				Log.d(LOG_TAG, movie.toString());
-
-				// Add to movie list
-				movieList.add(movie);
-
-			} while (mediaCursor.moveToNext());
-		}
 		
 		// Define movie list adapter
-		MovieListAdapter movieListAdapter = new MovieListAdapter(this, movieList);
+		MovieListAdapter movieListAdapter = new MovieListAdapter(this, VideoFrame.getVideoList());
 
 		// Set list view adapter to movie list adapter
 		ListView movieListView = (ListView) findViewById(R.id.movieListView);
 		movieListView.setAdapter(movieListAdapter);	
 		
-		// Set  item click listener
+		// Set  item click listener  
 		movieListView.setOnItemClickListener(this);
 	}
 
