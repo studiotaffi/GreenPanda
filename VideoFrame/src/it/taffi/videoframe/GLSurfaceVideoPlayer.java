@@ -30,15 +30,21 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
     private GLSurfaceView mEffectView;
     private int[] mTextures = new int[2];
     private EffectContext mEffectContext;
-    private Effect mEffect;
+    private Effect mEffect; //da qualche parte viene messo a null.
     private TextureRenderer mTexRenderer = new TextureRenderer();
     private int mImageWidth;
     private int mImageHeight;
     private boolean mInitialized = false;
-    int mCurrentEffect;
-
+    int mCurrentEffect = R.id.grayscale ;
+    
     public void setCurrentEffect(int effect) {
-        mCurrentEffect = effect;
+    	
+    	Log.v(TAG, "setCurrentEffect: " + effect);	
+    	Log.v(TAG, "setCurrentEffect: forzo mCurrentEffect a " + R.id.grayscale);	
+        
+    	mCurrentEffect = R.id.grayscale;  
+
+    	//mCurrentEffect = effect;
     }
 
     @Override
@@ -91,6 +97,8 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
     }
 
     private void initEffect() {
+        Log.v(TAG, "initEffect");
+
         EffectFactory effectFactory = mEffectContext.getFactory();
         if (mEffect != null) {
             mEffect.release();
@@ -98,6 +106,10 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
         /**
          * Initialize the correct effect based on the selected menu/action item
          */
+   Log.v(TAG, "initEffect: forzo mCurrentEffect a R.id.grayscale");
+        
+     mCurrentEffect = R.id.grayscale;
+        
         switch (mCurrentEffect) {
 
             case R.id.none:
@@ -239,13 +251,27 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
                 break;
 
         }
+        Log.v(TAG, "initEffect:END");
     }
 
     private void applyEffect() {
+        Log.v(TAG, "applyEffect");
+
+        Log.v(TAG, "mTextures[0]:" + mTextures[0]);
+        Log.v(TAG, "mImageWidth:" + mImageWidth);
+        Log.v(TAG, " mImageHeight:" +  mImageHeight);
+        Log.v(TAG, "mTextures[1]:" + mTextures[1]);
+        
+        Log.v(TAG, "mEffect:" + mEffect); //è null!!!
+        
         mEffect.apply(mTextures[0], mImageWidth, mImageHeight, mTextures[1]);
+        Log.v(TAG, "applyEffect:END");
+
     }
 
     private void renderResult() {
+        Log.v(TAG, "renderResult");
+
         if (mCurrentEffect != R.id.none) {
             // if no effect is chosen, just render the original bitmap
             mTexRenderer.renderTexture(mTextures[1]);
@@ -254,6 +280,8 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
             // render the result of applyEffect()
             mTexRenderer.renderTexture(mTextures[0]);
         }
+        Log.v(TAG, "renderResult:END");
+
     }
 
     @Override
@@ -270,13 +298,13 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
             mInitialized = true;
         }
         if (mCurrentEffect != R.id.none) {
-        	Log.v(TAG, "mCurrentEffect != R.id.none");
+        	Log.v(TAG, "onDrawFrame: mCurrentEffect != R.id.none");
         	//if an effect is chosen initialize it and apply it to the texture
             initEffect();
             applyEffect();
         }
         
-    	Log.v(TAG, "preRenderResult");
+    	Log.v(TAG, "onDrawFrame: preRenderResult");
         renderResult();
     	Log.v(TAG, "onDrawFrame:END");
         
@@ -285,6 +313,8 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
+        Log.v(TAG, "onSurfaceChanged");
+
         if (mTexRenderer != null) {
             mTexRenderer.updateViewSize(width, height);
         }
@@ -296,15 +326,24 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.v(TAG, "onCreateOptionsMenu");
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
+        Log.v(TAG, "onCreateOptionsMenu:END");
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        setCurrentEffect(item.getItemId());
+        Log.v(TAG, "onOptionsItemSelected");
+
+    	setCurrentEffect(item.getItemId());
         mEffectView.requestRender();
+        Log.v(TAG, "onOptionsItemSelected:END");
+
         return true;
+
     }
 }
