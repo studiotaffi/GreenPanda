@@ -1,6 +1,10 @@
 package it.taffi.videoframe;
 
 import java.io.IOException;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,22 +20,36 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 import android.widget.MediaController.MediaPlayerControl;
 
+import android.media.effect.Effect;
+import android.media.effect.EffectContext;
+import android.media.effect.EffectFactory;
+import android.opengl.GLES20;
+import android.opengl.GLSurfaceView;
+import android.opengl.GLUtils;
+
 public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callback {
 
   static final String TAG = "SurfaceViewVideoViewActivity";
   
-  private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     private static MovieListAdapter movieListAdapter = new MovieListAdapter( VideoFrame.getVideoList());
 	private Movie mymovie;
 	private int i=0;
 	private int lastcall=0;
 	private final static int videocount = movieListAdapter.getCount()-1;
-//	private static final String TAG = "TaxiSimplePlayer";
-
-//	private VideoView mVideoView;
-//	private MediaController mC;
+	
+	
+//	 private final SurfaceView surfaceView = (SurfaceView)findViewById(R.id.surfaceVideoPlayer);
+//     private GLSurfaceView surfaceView;
   
+//     private EffectContext mEffectContext;
+//     private EffectFactory effectFactory;
+// 	 private Effect mEffect;
+//	 private boolean mInitialized = false;
+//	 int mCurrentEffect;
+  
+
   private void loadVideo() {
 				
 		    do
@@ -77,7 +95,10 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
       // source.
       mediaPlayer.setDisplay(holder);
 //      mediaPlayer.setDataSource("/sdcard/test2.3gp");
-  
+      
+      
+      //mEffect = Effect.createEffect(
+      //EffectFactory.EFFECT_BRIGHTNESS;
 
 		loadVideo();
 		playVideo();
@@ -112,6 +133,10 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     
+  //  effectFactory = mEffectContext.getFactory(); 
+//	mEffect  = effectFactory.createEffect(EffectFactory.EFFECT_BLACKWHITE);
+	 
+    
 	// Going full screen
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
 	getWindow().setFlags(
@@ -120,17 +145,33 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
 
 
     setContentView(R.layout.surfaceplayer);
+   
     
     // Create a new Media Player.
     mediaPlayer = new MediaPlayer();
 
     // Get a reference to the Surface View.
-    final SurfaceView surfaceView =
-      (SurfaceView)findViewById(R.id.surfaceVideoPlayer);
-
+	 SurfaceView surfaceView = (SurfaceView)findViewById(R.id.surfaceVideoPlayer);
+	 
+    //GLSurfaceView surfaceView = (GLSurfaceView)findViewById(R.id.surfaceVideoPlayer);
+	
     // Configure the Surface View.
     surfaceView.setKeepScreenOn(true);
 
+    
+   //provo a fare effetti   
+    //surfaceView.setEGLContextClientVersion(2);
+   // surfaceView.setRenderer(this);
+ //   surfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+  //  mCurrentEffect = R.id.none;
+ 
+    
+    
+    
+    
+    
+    
+    
     // Configure the Surface Holder and register the callback.
     SurfaceHolder holder = surfaceView.getHolder();
     holder.addCallback(this);
@@ -141,6 +182,7 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
     
   
   }
+
 
 
 

@@ -5,11 +5,11 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical" >
-  <SurfaceView
+  <SurfaceView   
     android:id="@+id/surfaceVideoPlayer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_weight="30"
-  />
+    android:layout_width= "match_parent"
+    android:layout_height= "0dip"
+    android:layout_weight= "30"
+  /> 
 
 </LinearLayout>

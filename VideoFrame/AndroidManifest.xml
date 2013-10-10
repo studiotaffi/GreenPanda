@@ -33,6 +33,7 @@
                 android:value="it.taffi.videoframe.VideoFrame" />
         </activity>
         <activity android:name="SurfaceVideoPlayer"></activity>
+        <activity android:name="GLSurfaceVideoPlayer"></activity>
     </application>
 
 </manifest>

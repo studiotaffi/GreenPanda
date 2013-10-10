@@ -19,10 +19,22 @@
         android:text="Video List" />
     
     <Button
-        android:id="@+id/start"
+        android:id="@+id/start_videoview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start!" />
+        android:text="Start simple player!" />
     
-    
+     <Button
+        android:id="@+id/start_surface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start advanced player!" />
+     
+      <Button
+        android:id="@+id/start_GLSurface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start with Effects!" />
+      
+      
 </LinearLayout>

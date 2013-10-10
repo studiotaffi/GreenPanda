@@ -43,7 +43,11 @@ public class VideoFrame extends Activity {
 	private static final String TAG = "TaxiVideoFrame";
 
 	
-	private Button mStart;
+	private Button mStart_VideoView;
+	private Button mStart_Surface;
+	private Button mStart_GLSurface;
+
+	
 	private Button mVideoList;
 
 	private VideoView mVideoView; 
@@ -125,57 +129,52 @@ public class VideoFrame extends Activity {
         //getFileList();
 
 //		final View controlsView = findViewById(R.id.fullscreen_content_controls);
-		mStart = (Button) findViewById(R.id.start);
+		mStart_VideoView = (Button) findViewById(R.id.start_videoview);
+		mStart_Surface = (Button) findViewById(R.id.start_surface);
+		mStart_GLSurface = (Button) findViewById(R.id.start_GLSurface);
+		
+		
 		mVideoList = (Button) findViewById(R.id.videolist);
 		  
 		
 		/*
 		 *  Start Videoplayer!!!
-		 *  
+		 *  	private Button 
+
 		 * */
-        mStart.setOnClickListener(new OnClickListener() {
+        mStart_VideoView.setOnClickListener(new OnClickListener() {
         	
 			public void onClick(View view) {
 
-	//			Intent intent= new Intent(VideoFrame.this, SimpleVideoPlayer.class);
-				Intent intent= new Intent(VideoFrame.this, SurfaceVideoPlayer.class);
+				Intent intent= new Intent(VideoFrame.this, SimpleVideoPlayer.class);
 				
-				startActivity(intent);
-		
-
-				//mVideoView.setKeepScreenOn(true);
-				//mVideoView.start();
-			//	MediaController mediacontroller = new MediaController(getParent());
-			//	mVideoView.setMediaController(mediacontroller);
-			//	mediacontroller.setMediaPlayer(new MediaPlayerControl() {
-					
-//					public void start() {
-//						mediaPlayer.start();
-//					}
-					
-//				});
-						
-				// Set list view adapter to movie list adapter
-				//ListView movieListView = (ListView) findViewById(R.id.movieListView);
-				//movieListView.setAdapter(movieListAdapter);	
-				
-				
-				//	Intent intent= new Intent(VideoFrame.this, MoviePlayerActivity.class);
-				//	startActivity(intent);
-				/*
-				 * 
-				 * */
-
-		//		runOnUiThread(new Runnable(){   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//			public void run() {
-		//				playVideo();
-		//			}
-		//		});
-			
-				
-				
+				startActivity(intent);				
 			}
 		});
+        
+        
+  mStart_Surface.setOnClickListener(new OnClickListener() {
+        	
+			public void onClick(View view) {
+
+				Intent intent= new Intent(VideoFrame.this, SurfaceVideoPlayer.class);
+				
+				startActivity(intent);				
+			}
+		});
+  
+  mStart_GLSurface.setOnClickListener(new OnClickListener() {
+  	
+		public void onClick(View view) {
+
+//			Intent intent= new Intent(VideoFrame.this, SimpleVideoPlayer.class);
+			Intent intent= new Intent(VideoFrame.this, GLSurfaceVideoPlayer.class);
+			
+			startActivity(intent);				
+		}
+	});
+
+
         
         /*
          * *
