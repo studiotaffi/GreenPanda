@@ -65,6 +65,8 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
 
     private void loadTextures() {
         // Generate textures
+        Log.v(TAG, "loadTextures");
+
         GLES20.glGenTextures(2, mTextures, 0);
 
         // Load input bitmap
@@ -75,11 +77,17 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
         mTexRenderer.updateTextureSize(mImageWidth, mImageHeight);
 
         // Upload to texture
+ 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextures[0]);
+        Log.v(TAG, "glTextureBinded");
+
         GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+        Log.v(TAG, "texImaged2D");
 
         // Set texture parameters
         GLToolbox.initTexParams();
+        Log.v(TAG, "loadTextures:END");
+
     }
 
     private void initEffect() {
@@ -250,19 +258,29 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
 
     @Override
     public void onDrawFrame(GL10 gl) {
+        Log.v(TAG, "onDrawFrame");
+
         if (!mInitialized) {
-            //Only need to do this once
+            Log.v(TAG, "!mInizialized");
+
+        	//Only need to do this once
             mEffectContext = EffectContext.createWithCurrentGlContext();
             mTexRenderer.init();
             loadTextures();
             mInitialized = true;
         }
         if (mCurrentEffect != R.id.none) {
-            //if an effect is chosen initialize it and apply it to the texture
+        	Log.v(TAG, "mCurrentEffect != R.id.none");
+        	//if an effect is chosen initialize it and apply it to the texture
             initEffect();
             applyEffect();
         }
+        
+    	Log.v(TAG, "preRenderResult");
         renderResult();
+    	Log.v(TAG, "mCurrentEffect != R.id.none");
+        
+        
     }
 
     @Override

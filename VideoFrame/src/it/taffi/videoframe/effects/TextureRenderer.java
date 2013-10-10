@@ -87,6 +87,8 @@ public class TextureRenderer {
     	mTexWidth = texWidth;
         mTexHeight = texHeight;
         computeOutputVertices();
+   	 Log.v(TAG, "updateTextureSize:END");
+
     }
 
     public void updateViewSize(int viewWidth, int viewHeight) {
@@ -95,6 +97,8 @@ public class TextureRenderer {
     	mViewWidth = viewWidth;
         mViewHeight = viewHeight;
         computeOutputVertices();
+    	 Log.v(TAG, "updateViewSize:END");
+
     }
 
     public void renderTexture(int texId) {
