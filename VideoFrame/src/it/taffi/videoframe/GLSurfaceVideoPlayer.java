@@ -278,7 +278,7 @@ public class GLSurfaceVideoPlayer extends Activity implements GLSurfaceView.Rend
         
     	Log.v(TAG, "preRenderResult");
         renderResult();
-    	Log.v(TAG, "mCurrentEffect != R.id.none");
+    	Log.v(TAG, "onDrawFrame:END");
         
         
     }
