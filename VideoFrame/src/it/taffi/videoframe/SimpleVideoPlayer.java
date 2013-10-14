@@ -39,7 +39,9 @@ public class SimpleVideoPlayer extends Activity {
 		mymovie = (Movie) movieListAdapter.getItem(i);	
 		
         String mypath =  mymovie.getMoviePath();
+        
 		Log.v(TAG, "loading " + i + " path: " + mypath);	
+		
 		mVideoView.setVideoPath(mypath);
 		//mVideoView.requestFocus();
 	    

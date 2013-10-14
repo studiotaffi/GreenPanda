@@ -1,6 +1,7 @@
 package it.taffi.videoframe;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -36,9 +37,10 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
     private static MovieListAdapter movieListAdapter = new MovieListAdapter( VideoFrame.getVideoList());
 	private Movie mymovie;
 	private int i=0;
-	private int lastcall=0;
+	//private int lastcall=0;
 	private final static int videocount = movieListAdapter.getCount()-1;
-	
+
+	private ArrayList<Integer> justSeen = new ArrayList<Integer>();
 	
 //	 private final SurfaceView surfaceView = (SurfaceView)findViewById(R.id.surfaceVideoPlayer);
 //     private GLSurfaceView surfaceView;
@@ -52,12 +54,26 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
 
   private void loadVideo() {
 				
-		    do
-			 i = (int)(Math.random() * videocount);
-			while (i==lastcall);
-		     lastcall=i;
-		     
-			mymovie = (Movie) movieListAdapter.getItem(i);	
+ Log.v(TAG,"justSeen:"+justSeen);
+		    
+		    if (videocount>1) {  //randomizzo video; escludo gli ultimi videocount/2 recentemente visti.
+		    
+		    	do {
+   		    	 i = (int)(Math.random() * videocount);
+	 		     Log.v(TAG, "randomizzato: " + i); }
+			    while(justSeen.contains(i));
+				    
+				   // lastcall=i;
+				     
+		    	justSeen.add(i);
+		        if (justSeen.size()>videocount/2) {
+					Log.v(TAG, "removed first element");
+		        	justSeen.remove(0);
+		        }
+		      } 	 
+		     else  i=0;
+		    
+		     mymovie = (Movie) movieListAdapter.getItem(i);	
 			
 	        String mypath =  mymovie.getMoviePath();
 			Log.v(TAG, "loading " + i + " path: " + mypath);	
@@ -81,7 +97,7 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
 		
 		
 		private void playVideo() {
-		//	Log.v(TAG, "playing video; duration:" + mVideoView.getDuration());
+			Log.v(TAG, "playing video; duration:" + mediaPlayer.getDuration());
 		//	mVideoView.start();
 			
 	        mediaPlayer.start();		
@@ -135,7 +151,9 @@ public class SurfaceVideoPlayer extends Activity implements SurfaceHolder.Callba
     
   //  effectFactory = mEffectContext.getFactory(); 
 //	mEffect  = effectFactory.createEffect(EffectFactory.EFFECT_BLACKWHITE);
-	 
+	
+    Log.v(TAG, videocount + " videos found.");	
+	
     
 	// Going full screen
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
