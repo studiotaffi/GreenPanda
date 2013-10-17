@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--  menu' principale -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/Welcome"
     android:layout_width="match_parent"
@@ -7,21 +8,25 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="248dp"
-        android:layout_height="92dp"
-        android:text="\n\nWelcome to Taffi VideoLooper" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Welcome_Message"
+        android:textColor="@color/Green"
+        android:textColorLink="@color/Red" />
 
-    
     <Button
         android:id="@+id/videolist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Video List" />
+        android:background="@color/Green"
+        android:text="Video List"
+        android:textColorHint="@color/Green" />
     
     <Button
         android:id="@+id/start_videoview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/Green"
         android:text="Start simple player!" />
     
      <Button
@@ -31,10 +36,10 @@
         android:text="Start advanced player!" />
      
       <Button
-        android:id="@+id/start_GLSurface"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start with Effects!" />
-      
+          android:id="@+id/start_GLSurface"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/Red"
+          android:text="Start with Effects!" />
       
 </LinearLayout>

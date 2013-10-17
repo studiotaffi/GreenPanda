@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Listing 15-3: Sample layout using a Surface View -->
+<!-- "Advanced" player che usa una surface. Si può provare a fare un FrameLayout come per il simpleplayer. -->
 <LinearLayout   
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"

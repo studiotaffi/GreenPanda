@@ -34,5 +34,6 @@
     <string name="temperature">Temperature</string>
     <string name="tint">Tint</string>
     <string name="vignette">Vignette</string>
+    <string name="Welcome_Message">Welcome to VideoFrame VideoLooper</string>
 
 </resources>
