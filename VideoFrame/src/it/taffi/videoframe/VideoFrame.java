@@ -4,33 +4,15 @@ package it.taffi.videoframe;
 
 import java.util.ArrayList;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.MediaController;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
-import android.widget.AdapterView.OnItemClickListener;
-//import it.taffi.greenpanda.R;
-import it.taffi.videoframe.MovieListAdapter;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -40,7 +22,7 @@ import it.taffi.videoframe.MovieListAdapter;
  */
 public class VideoFrame extends Activity {
 	
-	private static final String TAG = "TaxiVideoFrame";
+	private static final String TAG = "VideoFrame";
 
 	
 	private Button mStart_VideoView;
@@ -50,9 +32,7 @@ public class VideoFrame extends Activity {
 	
 	private Button mVideoList;
 
-	private VideoView mVideoView; 
-
-//	private VideoList videolist = new VideoList((Activity)this); 
+	//	private VideoList videolist = new VideoList((Activity)this); 
 
 	static private ArrayList<Movie> movieList = new ArrayList<Movie>();
     
@@ -92,7 +72,7 @@ public class VideoFrame extends Activity {
 
 				// New movie object from the data
 				Movie movie = new Movie(mediaCursor, thumbnailCursor);
-				//Log.d(LOG_TAG, movie.toString());
+				Log.d(TAG, movie.getTitle());
 
 				// Add to movie list
 				movieList.add(movie);
