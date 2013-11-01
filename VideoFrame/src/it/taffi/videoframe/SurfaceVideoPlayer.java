@@ -19,47 +19,27 @@ public class SurfaceVideoPlayer extends Activity implements
 
 	private MediaPlayer mediaPlayer;
 
-	private static MovieListAdapter movieListAdapter = new MovieListAdapter(
+	private static ArrayList<Object> lo = new ArrayList<Object>(
 			VideoFrame.getVideoList());
 	private Movie mymovie;
 
-	private final static int videocount = movieListAdapter.getCount() - 1;
-
-	private ArrayList<Integer> justSeen = new ArrayList<Integer>();
-
-	// private final SurfaceView surfaceView =
-	// (SurfaceView)findViewById(R.id.surfaceVideoPlayer);
-	// private GLSurfaceView surfaceView;
-
-	// private EffectContext mEffectContext;
-	// private EffectFactory effectFactory;
-	// private Effect mEffect;
-	// private boolean mInitialized = false;
-	// int mCurrentEffect;
-
 	private void loadVideo() {
 
-		int i = 0;
-		Log.v(TAG, "videocount:" + videocount);
+		if (VideoFrame.getVideoList().size() <= 0) {
+			Log.v(TAG, "no video founded");
+			return;
+		}
+		
+		if (lo.isEmpty())
+			lo = new ArrayList<Object>(VideoFrame.getVideoList());
 
-		if (videocount > 1) { // randomizzo video; escludo gli ultimi
-								// videocount/2 recentemente visti.
+		Log.v(TAG, "movie count:" + lo.size());
 
-			do {
-				i = (int) (Math.random() * videocount);
-				Log.v(TAG, "randomizzato: " + i);
-			} while (justSeen.contains(i));
+		int i = (int) (Math.random() * lo.size());
 
-			// lastcall=i;
+		mymovie = (Movie) lo.get(i);
 
-			justSeen.add(i);
-			if (justSeen.size() > videocount / 2) {
-				Log.v(TAG, "removed first element");
-				justSeen.remove(0);
-			}
-		} 
-
-		mymovie = (Movie) movieListAdapter.getItem(i);
+		lo.remove(i);
 
 		String mypath = mymovie.getMoviePath();
 		Log.v(TAG, "loading " + i + " path: " + mypath);
@@ -81,11 +61,8 @@ public class SurfaceVideoPlayer extends Activity implements
 	}
 
 	private void playVideo() {
-		Log.v(TAG, "playing video; duration:" + mediaPlayer.getDuration());
-		// mVideoView.start();
-
+		Log.v(TAG, "playing video; duration:" + mediaPlayer.getDuration()/1000+" sec.");
 		mediaPlayer.start();
-
 	}
 
 	public void surfaceCreated(SurfaceHolder holder) {
@@ -132,7 +109,7 @@ public class SurfaceVideoPlayer extends Activity implements
 		// mEffect =
 		// effectFactory.createEffect(EffectFactory.EFFECT_BLACKWHITE);
 
-		Log.v(TAG, videocount + " videos found.");
+		Log.v(TAG, lo.size() + " videos found.");
 
 		// Going full screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

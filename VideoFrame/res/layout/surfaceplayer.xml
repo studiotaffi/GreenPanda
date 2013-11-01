@@ -8,7 +8,7 @@
   <SurfaceView   
     android:id="@+id/surfaceVideoPlayer"
     android:layout_width= "match_parent"
-    android:layout_height= "0dip"
+    android:layout_height= "0dp"
     android:layout_weight= "30"
   /> 
 
